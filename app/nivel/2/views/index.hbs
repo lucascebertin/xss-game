@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+        if(!!navigator.userAgent.match(/Trident/g)
+            || !!navigator.userAgent.match(/MSIE/g)
+            || !!navigator.userAgent.match(/Edge/g))
+            window.location = "https://www.google.com/chrome/";
+  </script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="POST" enctype="multipart/form-data" action="/nivel/2/foto">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <legend>Envie uma foto 13g41</legend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group" style="margin-bottom: 15px">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary">
+                                        Browse… <input type="file" style="display: none;" accept="image/*" name="foto">
+                                    </span>
+                                </label>
+                                <input style="cursor:default" id="feedback" type="text" class="form-control" readonly="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary text-right">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+  </div>
+  <script>
+    $(document).on('change', ':file', function() {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+    });
+
+    $(document).ready( function() {
+        $(':file').on('fileselect', function(event, numFiles, label) {
+            $('#feedback').val(label)
+        });
+        $('#feedback').on('click', function() {
+            $(':file').focus().trigger('click');
+        })
+
+    });
+  </script>
+</body>
+</html>

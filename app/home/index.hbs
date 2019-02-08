@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+        if(!!navigator.userAgent.match(/Trident/g)
+            || !!navigator.userAgent.match(/MSIE/g)
+            || !!navigator.userAgent.match(/Edge/g))
+            window.location = "https://www.google.com/chrome/";
+  </script>
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+    <div class="row">
+        <div class="col-md-12">
+          <div style="font-family: monospace;white-space:pre; font-size: 6px" class="text-center">
+XXXXXXX       XXXXXXX   SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS                         
+X:::::X       X:::::X SS:::::::::::::::S SS:::::::::::::::S                        
+X:::::X       X:::::XS:::::SSSSSS::::::SS:::::SSSSSS::::::S                        
+X::::::X     X::::::XS:::::S     SSSSSSSS:::::S     SSSSSSS                        
+XXX:::::X   X:::::XXXS:::::S            S:::::S                                    
+   X:::::X X:::::X   S:::::S            S:::::S                                    
+    X:::::X:::::X     S::::SSSS          S::::SSSS                                 
+     X:::::::::X       SS::::::SSSSS      SS::::::SSSSS                            
+     X:::::::::X         SSS::::::::SS      SSS::::::::SS                          
+    X:::::X:::::X           SSSSSS::::S        SSSSSS::::S                         
+   X:::::X X:::::X               S:::::S            S:::::S                        
+XXX:::::X   X:::::XXX            S:::::S            S:::::S                        
+X::::::X     X::::::XSSSSSSS     S:::::SSSSSSSS     S:::::S                        
+X:::::X       X:::::XS::::::SSSSSS:::::SS::::::SSSSSS:::::S                        
+X:::::X       X:::::XS:::::::::::::::SS S:::::::::::::::SS                         
+XXXXXXX       XXXXXXX SSSSSSSSSSSSSSS    SSSSSSSSSSSSSSS                           
+                                                                                   
+        GGGGGGGGGGGGG                                                              
+     GGG::::::::::::G                                                              
+   GG:::::::::::::::G                                                              
+  G:::::GGGGGGGG::::G                                                              
+ G:::::G       GGGGGG  aaaaaaaaaaaaa      mmmmmmm    mmmmmmm       eeeeeeeeeeee    
+G:::::G                a::::::::::::a   mm:::::::m  m:::::::mm   ee::::::::::::ee  
+G:::::G                aaaaaaaaa:::::a m::::::::::mm::::::::::m e::::::eeeee:::::ee
+G:::::G    GGGGGGGGGG           a::::a m::::::::::::::::::::::me::::::e     e:::::e
+G:::::G    G::::::::G    aaaaaaa:::::a m:::::mmm::::::mmm:::::me:::::::eeeee::::::e
+G:::::G    GGGGG::::G  aa::::::::::::a m::::m   m::::m   m::::me:::::::::::::::::e 
+G:::::G        G::::G a::::aaaa::::::a m::::m   m::::m   m::::me::::::eeeeeeeeeee  
+ G:::::G       G::::Ga::::a    a:::::a m::::m   m::::m   m::::me:::::::e           
+  G:::::GGGGGGGG::::Ga::::a    a:::::a m::::m   m::::m   m::::me::::::::e          
+   GG:::::::::::::::Ga:::::aaaa::::::a m::::m   m::::m   m::::m e::::::::eeeeeeee  
+     GGG::::::GGG:::G a::::::::::aa:::am::::m   m::::m   m::::m  ee:::::::::::::e  
+        GGGGGG   GGGG  aaaaaaaaaa  aaaammmmmm   mmmmmm   mmmmmm    eeeeeeeeeeeeee  
+
+
+</div>
+
+          <table class="table table-striped table-hover ">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Dificuldade</th>
+                      <th>Link</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>1</td>
+                      <td>Fácil</td>
+                      <td><a href="/nivel/1/">XSS 1</a></td>
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      <td>Médio</td>
+                      <td><a href="/nivel/2/">XSS 2</a></td>
+                  </tr>
+                  <tr class="info">
+                      <td>3</td>
+                      <td>Difícil</td>
+                      <td><a href="/nivel/3/">XSS 3</a></td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

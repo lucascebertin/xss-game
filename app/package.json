@@ -1,0 +1,22 @@
+{
+  "name": "lvl1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "handlebars": "^4.0.11",
+    "koa": "^2.5.1",
+    "koa-body": "^4.0.7",
+    "koa-qs": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.3",
+    "koa-views": "^6.1.4"
+  },
+  "scripts": {
+    "start": "node index"
+  },
+  "devDependencies": {
+    "yarn": "^1.7.0"
+  }
+}

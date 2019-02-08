@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+    const padrao = window.alert;
+    window.alert = function(msg) {
+        padrao('P4r4b3ñ$, v0©3 ©0ñ$3gu!u !ñj3t4r um $©r!pt ñ3$t4 p4g!ñ4\n\n\n\n'+msg)
+    }
+  </script>
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+<div style="font-family: monospace;white-space:pre; font-size: 8px">
+WWWWWWWW                           WWWWWWWW               lllllll                                                                                  
+W::::::W                           W::::::W               l:::::l                                                                                  
+W::::::W                           W::::::W               l:::::l                                                                                  
+W::::::W                           W::::::W               l:::::l                                                                                  
+ W:::::W           WWWWW           W:::::W eeeeeeeeeeee    l::::l     cccccccccccccccc   ooooooooooo      mmmmmmm    mmmmmmm       eeeeeeeeeeee    
+  W:::::W         W:::::W         W:::::Wee::::::::::::ee  l::::l   cc:::::::::::::::c oo:::::::::::oo  mm:::::::m  m:::::::mm   ee::::::::::::ee  
+   W:::::W       W:::::::W       W:::::We::::::eeeee:::::eel::::l  c:::::::::::::::::co:::::::::::::::om::::::::::mm::::::::::m e::::::eeeee:::::ee
+    W:::::W     W:::::::::W     W:::::We::::::e     e:::::el::::l c:::::::cccccc:::::co:::::ooooo:::::om::::::::::::::::::::::me::::::e     e:::::e
+     W:::::W   W:::::W:::::W   W:::::W e:::::::eeeee::::::el::::l c::::::c     ccccccco::::o     o::::om:::::mmm::::::mmm:::::me:::::::eeeee::::::e
+      W:::::W W:::::W W:::::W W:::::W  e:::::::::::::::::e l::::l c:::::c             o::::o     o::::om::::m   m::::m   m::::me:::::::::::::::::e 
+       W:::::W:::::W   W:::::W:::::W   e::::::eeeeeeeeeee  l::::l c:::::c             o::::o     o::::om::::m   m::::m   m::::me::::::eeeeeeeeeee  
+        W:::::::::W     W:::::::::W    e:::::::e           l::::l c::::::c     ccccccco::::o     o::::om::::m   m::::m   m::::me:::::::e           
+         W:::::::W       W:::::::W     e::::::::e         l::::::lc:::::::cccccc:::::co:::::ooooo:::::om::::m   m::::m   m::::me::::::::e          
+          W:::::W         W:::::W       e::::::::eeeeeeee l::::::l c:::::::::::::::::co:::::::::::::::om::::m   m::::m   m::::m e::::::::eeeeeeee  
+           W:::W           W:::W         ee:::::::::::::e l::::::l  cc:::::::::::::::c oo:::::::::::oo m::::m   m::::m   m::::m  ee:::::::::::::e  
+            WWW             WWW            eeeeeeeeeeeeee llllllll    cccccccccccccccc   ooooooooooo   mmmmmm   mmmmmm   mmmmmm    eeeeeeeeeeeeee  
+</div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <p>=================================================</p>
+            <p style="color: {{{ cor }}}"> ** {{ nome }} ** </p>
+            <p>=================================================</p>
+        </div>
+    </div>
+  </div>
+</body>

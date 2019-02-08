@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+    const padrao = window.alert;
+    window.alert = function(msg) {
+        padrao('P4r4b3ñ$, v0©3 ©0ñ$3gu!u !ñj3t4r um $©r!pt ñ3$t4 p4g!ñ4\n\n\n\n'+msg)
+    }
+  </script>
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+  <div style="font-family: monospace;white-space:pre; font-size: 8px">
+
+  </div>
+      <div class="row">
+          <div class="col-md-12 text-center">
+              <p>=================================================</p>
+              <img src="{{foto}}" title='{{{ nome }}}' />
+              <p>=================================================</p>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

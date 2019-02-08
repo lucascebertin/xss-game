@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+        if(!!navigator.userAgent.match(/Trident/g)
+            || !!navigator.userAgent.match(/MSIE/g)
+            || !!navigator.userAgent.match(/Edge/g))
+            window.location = "https://www.google.com/chrome/";
+  </script>
+
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="GET" action="/nivel/1/boas/vindas">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <legend>Formulário de boas-vindas</legend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="nome">Nome: </label>
+                                <div>
+                                    <input id="nome" class="form-control" type="text" name="nome" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="cor">Cor preferida: </label>
+                                <div>
+                                    <select id="cor" class="form-control" name="cor">
+                                        <option value="red">Vermelho</option>
+                                        <option value="pink">Pink</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary text-right">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
