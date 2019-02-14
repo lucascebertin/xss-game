@@ -8,7 +8,6 @@ const home = require('./home/routes')
 const nivel1 = require('./nivel/1/routes')
 const nivel2 = require('./nivel/2/routes')
 const nivel3 = require('./nivel/3/routes')
-const db = require('./infra/db')
 
 const views = viewEngine(__dirname, {
   map: { hbs: 'handlebars' },
@@ -33,6 +32,5 @@ const app = new Koa()
   .use(static('static'))
 
 qs(app, 'extended')
-app.context.db = db;
 
 module.exports = app

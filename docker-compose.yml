@@ -8,11 +8,13 @@ services:
     depends_on:
         - mongo
     environment:
+      PORT: 1337
       MONGO_HOST: 'mongo'
       MONGO_PORT: 27017
       MONGO_DATABASE: 'wh00t'
       MONGO_USERNAME: 'wh00t'
       MONGO_PASSWORD: 'superduperpasswordwithsuperprotection'
+      DEBUG: '*'
 
   puppeteer:
     build: './puppeteer'

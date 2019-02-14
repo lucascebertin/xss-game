@@ -5,8 +5,10 @@ const schemaDeUsuario = mongoose.Schema({
   password: mongoose.SchemaTypes.String
 })
 
-module.exports = mongoose.model(
+const criarSchema = conexao => conexao.model(
   'usuario',
   schemaDeUsuario,
   'usuario'
 )
+
+module.exports = criarSchema
