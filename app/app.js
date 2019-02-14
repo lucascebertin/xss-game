@@ -7,6 +7,8 @@ const koabody = require('koa-body')
 const home = require('./home/routes')
 const nivel1 = require('./nivel/1/routes')
 const nivel2 = require('./nivel/2/routes')
+const nivel3 = require('./nivel/3/routes')
+const db = require('./infra/db')
 
 const views = viewEngine(__dirname, {
   map: { hbs: 'handlebars' },
@@ -24,8 +26,13 @@ const app = new Koa()
   .use(home.routes())
   .use(nivel1.routes())
   .use(nivel2.routes())
+  .use(nivel3.rotasDeAnotacao.routes())
+  .use(nivel3.rotasDeAutenticacao.routes())
+  .use(nivel3.rotasDeCadastro.routes())
+  .use(nivel3.rotasDeHome.routes())
   .use(static('static'))
 
 qs(app, 'extended')
+app.context.db = db;
 
 module.exports = app

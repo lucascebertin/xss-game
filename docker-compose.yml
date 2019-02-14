@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  webapp:
+    build: './app'
+    ports:
+      - "1337:1337"
+    depends_on:
+        - mongo
+    environment:
+      MONGO_HOST: 'mongo'
+      MONGO_PORT: 27017
+      MONGO_DATABASE: 'wh00t'
+      MONGO_USERNAME: 'wh00t'
+      MONGO_PASSWORD: 'superduperpasswordwithsuperprotection'
+
+  puppeteer:
+    build: './puppeteer'
+    ports:
+      - "31337:31337"
+    depends_on:
+        - mongo
+    environment:
+      MONGO_HOST: 'mongo'
+      MONGO_PORT: 27017
+      MONGO_DATABASE: 'wh00t'
+      MONGO_USERNAME: 'wh00t'
+      MONGO_PASSWORD: 'superduperpasswordwithsuperprotection'
+
+  mongo:
+    image: 'bitnami/mongodb:latest'
+    restart: 'always'
+    ports:
+      - '27017:27017'
+    environment:
+      MONGODB_USERNAME: 'wh00t'
+      MONGODB_PASSWORD: 'superduperpasswordwithsuperprotection'
+      MONGODB_DATABASE: 'wh00t'
+      MONGODB_ROOT_PASSWORD: 'superduperpasswordforroot'
+
+  mongo-express:
+    image: 'mongo-express'
+    restart: 'always'
+    ports:
+      - '8081:8081'
+    environment:
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'false'
+      ME_CONFIG_MONGODB_AUTH_DATABASE: 'wh00t'
+      ME_CONFIG_MONGODB_AUTH_USERNAME: 'wh00t'
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: 'superduperpasswordwithsuperprotection'
+      ME_CONFIG_MONGODB_ADMINUSERNAME: 'root'
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 'superduperpasswordforroot'
+      ME_CONFIG_BASICAUTH_USERNAME: 'master'
+      ME_CONFIG_BASICAUTH_PASSWORD: 'superduperpassword'
+    depends_on:
+      - 'mongo'
