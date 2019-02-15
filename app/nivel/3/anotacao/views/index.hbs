@@ -62,7 +62,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <div class="text-center"><h1>Compartilhado comigo</h1></div>
+        <div class="text-center"><h1>Compartilhado comigo (apenas não lidas)</h1></div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -83,7 +83,7 @@
                         <td>{{titulo}}</td>
                         <td>{{descricao}}</td>
                         <td>{{usuario.email}}</td>
-                        <td><a href="/nivel/3/anotacao/{{_id}}">Visualizar</a></td>
+                        <td><a class="visualizar" href="/nivel/3/anotacao/{{_id}}">Visualizar</a></td>
                       </tr>
                     {{/each}}
                   </tbody>

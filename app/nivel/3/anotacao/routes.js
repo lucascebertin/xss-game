@@ -3,6 +3,7 @@ const views = 'nivel/3/anotacao/views'
 const criarModelDeAnotacoes = require('./Anotacao')
 const criarModelDeUsuarios = require('../usuario/Usuario')
 const middleware = require('../autenticacao/middleware/autenticacao')
+const mongoose = require('mongoose')
 
 module.exports = new Router({ prefix: '/nivel/3/anotacao' })
   .get('/criar', middleware, ctx => ctx.render(`${views}/cadastrar.hbs`))
@@ -27,7 +28,7 @@ module.exports = new Router({ prefix: '/nivel/3/anotacao' })
 
 
     const compartilhadosComigo = await (Anotacao.find({
-      compartilhamentos: { $elemMatch: { usuario: id } }
+      compartilhamentos: { $elemMatch: { usuario: id, lido: false } }
     })
     .populate('usuario')
     .exec())
@@ -39,19 +40,23 @@ module.exports = new Router({ prefix: '/nivel/3/anotacao' })
   })
   .get('/:id', middleware, async ctx => {
     const Anotacao = criarModelDeAnotacoes(ctx.db)
-    const anotacao = await (Anotacao.findById(ctx.params.id)
+    const id = ctx.params.id
+
+    if(!mongoose.Types.ObjectId.isValid(id))
+      return ctx.render(`${views}/erro.hbs`)
+
+    const anotacao = await (Anotacao.findById(id)
       .populate('compartilhamentos.usuario')
       .exec())
 
     if(anotacao === null || anotacao === undefined)
       return ctx.render(`${views}/erro.hbs`)
 
-    const id = ctx.params.usuario.id
     const proprietario = anotacao.usuario._id.toString() === id
 
     if(!proprietario && anotacao.compartilhamentos) {
       const idDoCompartilhamento = anotacao.compartilhamentos
-        .findIndex(x => x.usuario.toString() === id)
+        .findIndex(x => x.usuario._id.toString() === id)
 
       if(idDoCompartilhamento >= 0) {
         anotacao.compartilhamentos[idDoCompartilhamento].lido = true
@@ -72,20 +77,28 @@ module.exports = new Router({ prefix: '/nivel/3/anotacao' })
     })
   })
   .get('/:id/compartilhar', middleware, async ctx => {
+    const id = ctx.params.id
     const Anotacao = criarModelDeAnotacoes(ctx.db)
-    const anotacao = await Anotacao.findById(ctx.params.id)
+    const anotacao = await Anotacao.findById(id)
+
+    if(!mongoose.Types.ObjectId.isValid(id))
+      return ctx.render(`${views}/erro.hbs`)
 
     return ctx.render(`${views}/compartilhar.hbs`, { id: anotacao._id})
   })
   .post('/:id/compartilhar', middleware, async ctx => {
     const Anotacao = criarModelDeAnotacoes(ctx.db)
     const Usuario = criarModelDeUsuarios(ctx.db)
+    const id = ctx.params.id
+
+    if(!mongoose.Types.ObjectId.isValid(id))
+      return ctx.render(`${views}/erro.hbs`)
 
     const email = ctx.request.body.email
     if(email === null || email === '')
       return ctx.render(`${views}/erro.hbs`)
 
-    const anotacao = await Anotacao.findById(ctx.params.id)
+    const anotacao = await Anotacao.findById(id)
 
     if(anotacao === null)
       return ctx.render(`${views}/erro.hbs`)

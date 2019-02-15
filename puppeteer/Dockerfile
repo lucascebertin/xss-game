@@ -28,7 +28,9 @@ ENV MONGO_PORT 27017
 ENV MONGO_DATABASE wh00t
 ENV MONGO_USERNAME wh00t
 ENV MONGO_PASSWORD superduperpasswordwithsuperprotection
+ENV SERVICE_URL webapp:1337
 ENV URL http://localhost:1337
+ENV CHROME /usr/bin/chromium-browser
 
 WORKDIR /app
 RUN apk update
@@ -42,4 +44,6 @@ COPY . ./
 
 EXPOSE 31337
 
-CMD ./wait-for.sh -t 30 $MONGO_HOST:$MONGO_PORT -- npx yarn start
+CMD ./wait-for.sh -t 30 $MONGO_HOST:$MONGO_PORT -- \
+    ./wait-for.sh -t 30 $SERVICE_URL -- \
+    npx yarn start
