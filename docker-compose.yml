@@ -5,6 +5,7 @@ services:
     build: './app'
     ports:
       - "1337:1337"
+      - "9229:9229"
     depends_on:
         - mongo
     environment:
@@ -14,6 +15,8 @@ services:
       MONGO_DATABASE: 'wh00t'
       MONGO_USERNAME: 'wh00t'
       MONGO_PASSWORD: 'superduperpasswordwithsuperprotection'
+      #O salt original possui apenas um $ em cada posição, a engine python do docker-compose entende que $$ é escape para interpolação de strings
+      SALT: '$$2a$$10$$3G996MU.UVf23MKhXTIf4e'
       DEBUG: '*'
 
   puppeteer:
@@ -28,6 +31,7 @@ services:
       MONGO_DATABASE: 'wh00t'
       MONGO_USERNAME: 'wh00t'
       MONGO_PASSWORD: 'superduperpasswordwithsuperprotection'
+      URL: 'http://webapp:1337'
 
   mongo:
     image: 'bitnami/mongodb:latest'

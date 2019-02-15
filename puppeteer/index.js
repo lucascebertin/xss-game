@@ -1,4 +1,18 @@
 const { CronJob } = require('cron')
+const puppeteer = require('puppeteer')
+
+const main = async () => {
+
+  const browser = await puppeteer.launch({
+    executablePath: '/usr/bin/chromium-browser',
+    args: ['--no-sandbox', '--disable-dev-shm-usage']
+  })
+  const page = await browser.newPage()
+  await page.goto(`${process.env.URL}/nivel/3/cadastrar`, { waitUntil: 'networkidle2' })
+  await browser.close()
+}
+
+main()
 
 new CronJob('*/15 * * * * *', () => {
   console.log(new Date())

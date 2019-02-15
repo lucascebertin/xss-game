@@ -15,10 +15,10 @@ module.exports = new Router({ prefix: '/nivel/3' })
       if(!authz)
         return ctx.render(`${views}/index.hbs`, { logado: false })
 
-      const id = jwt.verify(authz, configuracao.segredo)
-      const usuario = await Usuario.findById(id)
+      const token = jwt.verify(authz, configuracao.segredo)
+      const usuario = await Usuario.findById(token.id)
 
-      return ctx.render(`${views}/index.hbs`, { logado: !!usuario })
+      return ctx.render(`${views}/index.hbs`, { logado: !!usuario, usuario: `${usuario.nome} (${usuario.email})` })
     } catch (erro) {
       return ctx.render('nivel/3/erro.hbs')
     }

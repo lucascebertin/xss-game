@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+        if(!!navigator.userAgent.match(/Trident/g)
+            || !!navigator.userAgent.match(/MSIE/g)
+            || !!navigator.userAgent.match(/Edge/g))
+            window.location = "https://www.google.com/chrome/";
+  </script>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css">
+  <style>
+    .pell-content {
+      font-size: 14px;
+      line-height: 1.428571429;
+      color: #090;
+      background-color: #000;
+      background-image: none;
+      border: 1px solid #444;
+      border-radius: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+      -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+  </style>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+    <div class="row">
+      <div class="col-md-12">
+        <form method="POST" action="/nivel/3/anotacao/">
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-12">
+                        <legend>Formulário de anotações</legend>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="titulo">Titulo: </label>
+                            <div>
+                                <input id="titulo" class="form-control" type="text" name="titulo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="descricao">Descrição: </label>
+                            <div>
+                                <textarea style="display: none"  id="descricao" class="form-control" name="descricao" class="pell"></textarea>
+                                <div id="editor" class="pell"></div>
+                                <div>
+                                  HTML output:
+                                  <div id="html-output" style="white-space:pre-wrap;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary text-right">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/pell"></script>
+  <script>
+
+  window.pell.init({
+    element: document.getElementById('editor'),
+    onChange: html => {
+      document.getElementById('html-output').textContent = html
+      document.getElementById('descricao').textContent = html
+    },
+    defaultParagraphSeparator: 'p',
+    styleWithCSS: true,
+    actions: [
+      'bold',
+      'underline',
+    ],
+    classes: {
+      actionbar: 'pell-actionbar-custom-name',
+      button: 'pell-button-custom-name',
+      content: 'pell-content',
+      selected: 'pell-button-selected-custom-name'
+    }
+  })
+  </script>
+</body>
+</html>

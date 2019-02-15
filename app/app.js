@@ -29,7 +29,7 @@ const app = new Koa()
   .use(nivel3.rotasDeAutenticacao.routes())
   .use(nivel3.rotasDeCadastro.routes())
   .use(nivel3.rotasDeHome.routes())
-  .use(static('static'))
+  .use(static('./static'))
 
 qs(app, 'extended')
 

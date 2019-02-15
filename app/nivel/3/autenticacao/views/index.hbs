@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+        if(!!navigator.userAgent.match(/Trident/g)
+            || !!navigator.userAgent.match(/MSIE/g)
+            || !!navigator.userAgent.match(/Edge/g))
+            window.location = "https://www.google.com/chrome/";
+  </script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+    <div class="row">
+        <div class="col-md-12">
+          <form method="POST" action="/nivel/3/autenticar">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <legend>Formulário de autenticação</legend>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="email">Email: </label>
+                                <div>
+                                    <input id="email" class="form-control" type="email" name="email" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="senha">Senha: </label>
+                                <div>
+                                    <input id="senha" class="form-control" type="password" name="senha" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary text-right">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

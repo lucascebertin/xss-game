@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XSS</title>
+  <link href="/assets/css/hacker.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/assets/images/hacker.png" />
+  <script>
+        if(!!navigator.userAgent.match(/Trident/g)
+            || !!navigator.userAgent.match(/MSIE/g)
+            || !!navigator.userAgent.match(/Edge/g))
+            window.location = "https://www.google.com/chrome/";
+  </script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container " style="max-width: 900px; margin-top: 30px">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center"><h1>Minhas anotações</h1></div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Titulo</th>
+                      <th>Descrição (50 chars ...)</th>
+                      <th>Compartilhado?</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each anotacoes}}
+                      <tr>
+                        <td>{{_id}}</td>
+                        <td>{{titulo}}</td>
+                        <td>{{descricao}}</td>
+                        <td>{{compartilhado}}</td>
+                        <td><a href="/nivel/3/anotacao/{{_id}}">Visualizar</a></td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-12 text-right">
+                  <a href="/nivel/3/anotacao/criar" class="btn btn-primary text-right">Criar anotação</a>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center"><h1>Compartilhado comigo</h1></div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <table class="table table-striped table-hover ">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Titulo</th>
+                      <th>Descrição (50 chars ...)</th>
+                      <th>Compartilhado por</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each compartilhamentos}}
+                      <tr>
+                        <td>{{_id}}</td>
+                        <td>{{titulo}}</td>
+                        <td>{{descricao}}</td>
+                        <td>{{usuario.email}}</td>
+                        <td><a href="/nivel/3/anotacao/{{_id}}">Visualizar</a></td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<!-- problemas ao utilizar esta ferramenta? dispare um e-mail para hack@me.plz -->
+<!-- TODO: adicionar mensagens de erro melhores -->
