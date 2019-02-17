@@ -10,16 +10,24 @@ module.exports = async (context, next) => {
   if(cookieDeAutenticacao === '')
     return context.redirect('/nivel/3/autenticar')
 
-  const token = jwt.verify(
-    cookieDeAutenticacao,
-    configuracao.segredo
-  )
+  try {
+    const token = jwt.verify(
+      cookieDeAutenticacao,
+      configuracao.segredo
+    )
 
-  if(token === null || token === '' || token === undefined)
-    return context.redirect('/nivel/3/autenticar')
+    if(token === null || token === '' || token === undefined)
+      return context.redirect('/nivel/3/autenticar')
 
-  const Usuario = criarModel(context.db)
-  context.params.usuario = await Usuario.findById(token.id)
+    const Usuario = criarModel(context.db)
+    context.params.usuario = await Usuario.findById(token.id)
+  } catch (erro) {
+    if(erro && erro.message === 'jwt expired') {
+      context.cookies.set('AUTHZ', null)
+    }
+
+    return context.redirect('/nivel/3/')
+  }
 
   return await next()
 }

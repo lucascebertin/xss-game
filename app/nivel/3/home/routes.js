@@ -20,6 +20,10 @@ module.exports = new Router({ prefix: '/nivel/3' })
 
       return ctx.render(`${views}/index.hbs`, { logado: !!usuario, usuario: `${usuario.nome} (${usuario.email})` })
     } catch (erro) {
-      return ctx.render('nivel/3/erro.hbs')
+      if(erro && erro.message === 'jwt expired') {
+        ctx.cookies.set('AUTHZ', null)
+        return ctx.redirect('/nivel/3/')
+      }
+      return ctx.render('nivel/3/home/views/erro.hbs')
     }
   })

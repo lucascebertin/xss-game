@@ -52,16 +52,17 @@ module.exports = new Router({ prefix: '/nivel/3/anotacao' })
     if(anotacao === null || anotacao === undefined)
       return ctx.render(`${views}/erro.hbs`)
 
-    const proprietario = anotacao.usuario._id.toString() === id
+    const idDoUsuario = ctx.params.usuario.id
+    const proprietario = anotacao.usuario._id.toString() === idDoUsuario
 
     if(!proprietario && anotacao.compartilhamentos) {
-      const idDoCompartilhamento = anotacao.compartilhamentos
-        .findIndex(x => x.usuario._id.toString() === id)
-
-      if(idDoCompartilhamento >= 0) {
-        anotacao.compartilhamentos[idDoCompartilhamento].lido = true
-        await anotacao.save()
+      for(const c of anotacao.compartilhamentos) {
+        if(c.usuario._id.toString() === idDoUsuario) {
+          c.lido = true
+        }
       }
+
+      await anotacao.save()
     }
 
     return ctx.render(`${views}/anotacao.hbs`, {

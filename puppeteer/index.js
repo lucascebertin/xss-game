@@ -33,7 +33,8 @@ const main = async () => {
     waitUntil: 'networkidle2'
   })
 
-  if((await page.$('#erro') !== null)) {
+  const usuarioJaExiste = (await page.$('#erro') !== null)
+  if(usuarioJaExiste) {
     console.log('- Usuário já criado')
 
     console.log('Tentando autenticar')
@@ -58,26 +59,33 @@ const main = async () => {
     const cookies = await page.cookies()
     const cookiesEmTexto = cookies.map(x => `${x.name}, ${x.path}, ${x.value}`)
     console.log(`- Autenticado com sucesso! c00kies: ${cookiesEmTexto}`)
+  } else {
+    //criar anotação com uma flag e mensagem de sucesso!
   }
 
-  new CronJob('*/30 * * * * *', async () => {
+  new CronJob('*/60 * * * * *', async () => {
     console.log(`Verificando links em ${new Date().toISOString()}`)
     await page.goto(`${process.env.URL}/nivel/3/anotacao`, {
       waitUntil: 'networkidle2'
     })
 
-    const links = await page.$$('.visualizar')
+    const links = await page.evaluate(() => {
+      const anchors = document.querySelectorAll('.visualizar');
+      return [].map.call(anchors, a => a.href);
+    })
 
     if(links && links.length > 0) {
       console.log(`- ${links.length} encontrados`)
       for(let i = 0; i < links.length; i++){
         const link = links[i]
-        console.log(`- Visualizando link: ${i}`)
 
-        await link.click()
-        await page.waitForNavigation({
+        console.log(`- Visualizando link: ${link}`)
+
+        await page.goto(link, {
           waitUntil: 'networkidle2'
         })
+
+        console.log('- Link visitado')
       }
     } else {
       console.log('- Nenhum link encontrado...')
@@ -90,7 +98,7 @@ const main = async () => {
     //5)Notificar via terminal os links que foram visitados
   } , async () => {
     await browser.close()
-  }, true, 'America/Los_Angeles')
+  }, true, 'America/Los_Angeles', null, true)
 }
 
 main()

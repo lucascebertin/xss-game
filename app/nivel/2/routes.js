@@ -27,6 +27,7 @@ module.exports = new Router({ prefix: '/nivel/2' })
       ]
 
       ctx.append('x-xss-protection', '0')
+      ctx.cookies.set('AUTHZ', null)
 
       await fs.copyFileAsync(foto.path, `./static/assets/images/uploads/${foto.name}`)
 
