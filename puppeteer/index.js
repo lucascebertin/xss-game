@@ -1,6 +1,8 @@
 const { CronJob } = require('cron')
 const puppeteer = require('puppeteer')
 
+// TODO: Fazer com que o admin consiga relogar caso o JWT expire (depois de 24hrs logado)
+
 const main = async () => {
   console.log('** Iniciando chrome **')
   const browser = await puppeteer.launch({
