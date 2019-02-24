@@ -1,5 +1,8 @@
 const { CronJob } = require('cron')
 const puppeteer = require('puppeteer')
+const axios = require('axios')
+const querystring = require('querystring')
+
 
 // TODO: Fazer com que o admin consiga relogar caso o JWT expire (depois de 24hrs logado)
 
@@ -62,7 +65,25 @@ const main = async () => {
     const cookiesEmTexto = cookies.map(x => `${x.name}, ${x.path}, ${x.value}`)
     console.log(`- Autenticado com sucesso! c00kies: ${cookiesEmTexto}`)
   } else {
-    //criar anotação com uma flag e mensagem de sucesso!
+    console.log('Criando anotação com uma flag e mensagem de sucesso')
+
+    const titulo = 'P4r4b&n$! V0c3 H4K30U o S1S7&M4'
+    const descricao = '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+    const cookies = await page.cookies()
+    const cookiesEmTexto = cookies.map(x => `${x.name}=${x.value}`)
+
+    axios.post(`${process.env.URL}/nivel/3/anotacao/`,
+      querystring.stringify({
+        titulo: titulo,
+        descricao: descricao
+      }), {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Cookie": cookiesEmTexto
+        }
+      }).then(function(response) {
+        console.log('Anotação criada com sucesso')
+      })
   }
 
   new CronJob('*/60 * * * * *', async () => {
