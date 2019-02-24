@@ -17,7 +17,7 @@ module.exports = new Router({ prefix: '/nivel/3/anotacao' })
 
     const minhasAnotacoes = anotacoes.map(x => ({
       ...x._doc,
-      descricao: x._doc.descricao.length > 50
+      descricao: x._doc.descricao && x._doc.descricao.length > 50
         ? `${x._doc.descricao.substring(0, 50)}...`
         : x._doc.descricao,
       compartilhado: x._doc.compartilhamentos &&
